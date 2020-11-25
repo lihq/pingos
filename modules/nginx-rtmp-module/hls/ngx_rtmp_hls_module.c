@@ -2253,9 +2253,12 @@ ngx_rtmp_hls_video(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
         }
 
         if (ngx_rtmp_hls_copy(s, out.last, &p, len - 1, &in) != NGX_OK) {
+            //ngx_log_error(NGX_LOG_ERR, s->log, 0,
+            //            "rtmp-hls: video| copy nal, failed copy, len %d, in %d",
+            //            len - 1, in->buf->last - in->buf->pos);
+            //by lihq 20201125
             ngx_log_error(NGX_LOG_ERR, s->log, 0,
-                        "rtmp-hls: video| copy nal, failed copy, len %d, in %d",
-                        len - 1, in->buf->last - in->buf->pos);
+                "rtmp-hls: video| copy nal, failed copy");
             return NGX_ERROR;
         }
 
