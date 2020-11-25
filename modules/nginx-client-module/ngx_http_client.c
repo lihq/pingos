@@ -1180,7 +1180,13 @@ ngx_http_client_body_length(ngx_http_request_t *r, ngx_chain_t *cl)
     ngx_int_t                   len;
 
     ctx = r->ctx[0];
-
+       
+    //修正主动与服务端断开 added by lihq 20201125
+    if (NULL==cl && 0 == ctx->length) {
+        return NGX_DONE;
+    }
+    ////////
+       
     for (ll = &ctx->in; *ll; ll = &(*ll)->next);
 
     while (cl) {
